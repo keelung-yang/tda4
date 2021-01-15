@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VISS_GLBCE_CFG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--this is comment-->
+	<dcc_name>viss_glbce_cfg</dcc_name>
+	<dcc_header>
+		<camera_module_id>  820 </camera_module_id>
+		<dcc_descriptor_id>   6 </dcc_descriptor_id>
+		<algorithm_vendor_id>  1 </algorithm_vendor_id>
+		<tunning_tool_version> 0 </tunning_tool_version>
+	</dcc_header>
+	<!--=======================================================================-->
+    <typedef>
+        <viss_glbce type="struct">
+            <strength      type="uint32"> </strength>
+            <intensity_var type="uint32"> </intensity_var>     <!-- U4 -->
+            <space_var     type="uint32"> </space_var>         <!-- U4 -->
+            <slope_min_lim type="uint32">  </slope_min_lim>     <!-- U8 -->
+            <slope_max_lim type="uint32">  </slope_max_lim>     <!-- U8 -->
+            <fwd_prcpt_en  type="uint32">  </fwd_prcpt_en>
+            <fwd_prcpt_lut type="uint32[65]"> </fwd_prcpt_lut>
+            <rev_prcpt_en  type="uint32">  </rev_prcpt_en>
+            <rev_prcpt_lut type="uint32[65]"> </rev_prcpt_lut>
+            <asym_lut      type="uint32[33]"> </asym_lut>      <!-- U16 -->
+		</viss_glbce>
+    </typedef>
+
+	<!--=======================================================================-->
+	
+	<use_case val="1023">
+		<n-space>
+			<region0 class="0">
+				<gain             val="0" min="0" max="10240">  </gain>
+				<exposure         val="1" min="0" max="10000000">  </exposure>
+				<colortemperature val="2" min="0" max="10000">  </colortemperature>
+			</region0>
+		</n-space>
+	    <parameter_package>
+            <viss_glbce_dcc type="viss_glbce">
+			{
+                255, //strength
+                12,  //intensity_var
+                7,   //space_var
+                64,  //slope_min_lim
+                72,  //slope_max_lim
+                1,
+                {    //fwd_prcpt_lut
+                    0, 4622, 8653, 11684, 14195, 16380, 18335, 20118, 21766, 23304,
+                    24751, 26119, 27422, 28665, 29857, 31003, 32108, 33176, 34209, 35211,
+                    36185, 37132, 38055, 38955, 39834, 40693, 41533, 42355, 43161, 43951,
+                    44727, 45488, 46236, 46971, 47694, 48405, 49106, 49795, 50475, 51145,
+                    51805, 52456, 53099, 53733, 54360, 54978, 55589, 56193, 56789, 57379,
+                    57963, 58539, 59110, 59675, 60234, 60787, 61335, 61877, 62414, 62946,
+                    63473, 63996, 64513, 65026, 65535,
+
+                },
+                1,
+                {    //rev_prcpt_lut
+                    0, 228, 455, 683, 910, 1138, 1369, 1628, 1912, 2221,
+                    2556, 2916, 3304, 3717, 4158, 4626, 5122, 5645, 6197, 6777,
+                    7386, 8024, 8691, 9387, 10113, 10869, 11654, 12471, 13317, 14194,
+                    15103, 16042, 17012, 18014, 19048, 20113, 21210, 22340, 23501, 24696,
+                    25922, 27182, 28475, 29800, 31159, 32552, 33977, 35437, 36930, 38458,
+                    40019, 41615, 43245, 44910, 46609, 48343, 50112, 51916, 53755, 55630,
+                    57539, 59485, 61466, 63482, 65535
+                },
+                {    //asym_lut
+                        0,  12173,  20997,  27687,  32934,
+                    37159,  40634,  43543,  46014,  48138,
+                    49984,  51603,  53035,  54310,  55453,
+                    56483,  57416,  58265,  59041,  59753,
+                    60409,  61015,  61577,  62099,  62585,
+                    63039,  63464,  63863,  64237,  64590,
+                    64923,  65237,  65535,
+                },
+			  }
+            </viss_glbce_dcc>
+	    </parameter_package>
+	</use_case>
+	
+	<!--=====================================================================-->
+</VISS_GLBCE_CFG>

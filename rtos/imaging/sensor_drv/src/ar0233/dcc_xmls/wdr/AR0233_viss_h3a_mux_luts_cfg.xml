@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VISS_H3A_MUX_LUTS_CFG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--this is comment-->
+	<dcc_name>viss_h3a_mux_luts_cfg</dcc_name>
+	<dcc_header>
+		<camera_module_id>    233 </camera_module_id>
+		<dcc_descriptor_id>   2 </dcc_descriptor_id>
+		<algorithm_vendor_id>  1 </algorithm_vendor_id>
+		<tunning_tool_version> 0 </tunning_tool_version>
+	</dcc_header>
+	<!--=======================================================================-->
+    <typedef>
+        <iss_h3a_mux_luts type="struct">
+		  <enable type="uint16"> </enable> <!-- enable -->
+		  <num_luts type="uint16"> </num_luts> <!-- number of LUTs (0 ~ 3) -->
+          <h3a_mux_luts type="uint16[3][639]"> </h3a_mux_luts> <!-- H3A LUTs -->
+		</iss_h3a_mux_luts>
+    </typedef>
+	<!--=======================================================================-->
+	
+	<use_case val="1023">
+		<n-space>
+			<region0 class="0">
+				<gain             val="0" min="0" max="10240">  </gain>
+				<exposure         val="1" min="0" max="10000000">  </exposure>
+				<colortemperature val="2" min="0" max="10000">  </colortemperature>
+			</region0>
+		</n-space>
+	    <parameter_package>
+            <iss_h3a_mux_luts_cfg type="iss_h3a_mux_luts">
+            {
+                1, //enable
+                1, //number of LUTs
+                {
+                    {#include "lut_h3a_16_b3tob12.txt"},
+                    {#include "lut_h3a_16_b3tob12.txt"},
+                    {#include "lut_h3a_16_b3tob12.txt"}
+                },
+            }
+            </iss_h3a_mux_luts_cfg>
+	    </parameter_package>
+	</use_case>
+	
+	<!--=====================================================================-->
+</VISS_H3A_MUX_LUTS_CFG>
+

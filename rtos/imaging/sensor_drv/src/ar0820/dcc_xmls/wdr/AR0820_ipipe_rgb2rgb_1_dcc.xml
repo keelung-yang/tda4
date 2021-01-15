@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IPIPE_RGB_RGB_1_xml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--this is comment: mars lens -->
+	<dcc_name>ipipe_rgb2rgb</dcc_name>
+	<dcc_header>
+		<camera_module_id>    820 </camera_module_id>
+		<dcc_descriptor_id>   10 </dcc_descriptor_id>
+		<algorithm_vendor_id>  1 </algorithm_vendor_id>
+		<tunning_tool_version> 0 </tunning_tool_version>
+	</dcc_header>
+	<!--=======================================================================-->
+	<typedef>
+		<cfg_rgb2rgb type="struct">
+			<!-- [RR] [GR] [BR] [CR]
+			     [RG] [GG] [BG] [CG]
+			     [RB] [GB] [BB] [CB] -->
+			<!-- Blending + Chroma values (S12Q8 format) -->
+			<ccm type="int16[3][4]"> </ccm> <!-- ipipe rgb2rgb matrix: S12Q8 -->
+			<!-- [OR] [OG] [OB] -->
+			<!-- Blending offset value for R,G,B - (S13) -->
+			<offset type="int16[3]"> </offset> <!-- ipipe rgb2rgb1 offset: S13 -->
+		</cfg_rgb2rgb>
+	</typedef>
+	<!--=======================================================================-->
+				
+	<use_case val="1023">
+		<n-space>
+			<region0 class="0">
+				<colortemperature val="2" min="0" max="2800">  </colortemperature>
+				<exposure val="1" min="0" max="10000000">  </exposure>
+				<gain val="0" min="0" max="1024">  </gain>
+			</region0>
+			
+			<region1 class="1">
+				<colortemperature val="2" min="2801" max="3400">  </colortemperature>
+				<exposure val="1" min="0" max="10000000">  </exposure>
+				<gain val="0" min="0" max="1024">  </gain>
+			</region1>
+			
+			<region2 class="2">
+				<colortemperature val="2" min="3301" max="4500">  </colortemperature>
+				<exposure val="1" min="0" max="10000000">  </exposure>
+				<gain val="0" min="0" max="1024">  </gain>
+			</region2>
+			
+			<region3 class="3">
+				<colortemperature val="2" min="4301" max="5400">  </colortemperature>
+				<exposure val="1" min="0" max="10000000">  </exposure>
+				<gain val="0" min="0" max="1024">  </gain>
+			</region3>
+
+			<region4 class="4">
+				<colortemperature val="2" min="5301" max="20000">  </colortemperature>
+				<exposure val="1" min="0" max="10000000">  </exposure>
+				<gain val="0" min="0" max="1024">  </gain>
+			</region4>
+			
+		</n-space>
+	
+		<parameter_package>
+			<ipipe_rgb2rgb type="cfg_rgb2rgb">
+			{
+				{
+                    //{ 303,     13,    -61, 0},   
+                    //{-460,    568,    149, 0},  
+                    //{ 256,  -1297,   1298, 0},     
+                    { 480, -283,   58, 0},
+                    {-384,  657,  -17, 0},
+                    { 161, -792,  887, 0}
+				},
+				{0, 0, 0}
+			}
+			</ipipe_rgb2rgb>
+		</parameter_package>
+		
+		<parameter_package>
+			<ipipe_rgb2rgb type="cfg_rgb2rgb">
+			{
+				{
+                    { 480, -283,   58, 0},
+                    {-384,  657,  -17, 0},
+                    { 161, -792,  887, 0}
+				},
+				{0, 0, 0}
+			}
+			</ipipe_rgb2rgb>
+		</parameter_package>
+		
+		<parameter_package>
+			<ipipe_rgb2rgb type="cfg_rgb2rgb">
+			{
+				{
+                    {   466, -266,   55, 0},
+                    {  -347,  705, -103, 0},
+                    {   111, -681,  825, 0}
+				},
+				{0, 0, 0}
+			}
+			</ipipe_rgb2rgb>
+		</parameter_package>
+		
+		<parameter_package>
+			<ipipe_rgb2rgb type="cfg_rgb2rgb">
+			{
+				{
+                    { 370, -130,   15, 0},
+                    {-318,  727, -152, 0},
+                    { 115, -604,  746, 0}
+				},
+				{0, 0, 0}
+			}
+			</ipipe_rgb2rgb>
+		</parameter_package>
+		
+		<parameter_package>
+			<ipipe_rgb2rgb type="cfg_rgb2rgb">
+			{
+				{
+                    { 408, -172,   19, 0},
+                    {-310,  785, -219, 0},
+                    {  81, -459,  634, 0}
+				},
+				{0, 0, 0}
+			}
+			</ipipe_rgb2rgb>
+		</parameter_package>
+	</use_case>
+	
+	<!--=====================================================================-->
+</IPIPE_RGB_RGB_1_xml>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VISS_BLC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--this is comment-->
+  <dcc_name>VISS_BLC</dcc_name>
+  <dcc_header>
+    <camera_module_id>    9702</camera_module_id>
+    <dcc_descriptor_id>   1</dcc_descriptor_id>
+    <algorithm_vendor_id>   1</algorithm_vendor_id>
+    <tunning_tool_version>       0</tunning_tool_version>
+  </dcc_header>
+  <!--=======================================================================-->
+      <typedef>
+      <viss_clamp type="struct"> 
+       			<viss_clamp_vshort type="struct">
+       				<dcoffset_clamp_value_0 type="int16"> </dcoffset_clamp_value_0> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_1 type="int16"> </dcoffset_clamp_value_1> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_2 type="int16"> </dcoffset_clamp_value_2> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_3 type="int16"> </dcoffset_clamp_value_3> <!-- additive dc offset, S13 -->
+       			</viss_clamp_vshort>
+       			<viss_clamp_short type="struct">
+       				<dcoffset_clamp_value_0 type="int16"> </dcoffset_clamp_value_0> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_1 type="int16"> </dcoffset_clamp_value_1> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_2 type="int16"> </dcoffset_clamp_value_2> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_3 type="int16"> </dcoffset_clamp_value_3> <!-- additive dc offset, S13 -->
+       			</viss_clamp_short>
+       			<viss_clamp_long type="struct">
+       				<dcoffset_clamp_value_0 type="int16"> </dcoffset_clamp_value_0> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_1 type="int16"> </dcoffset_clamp_value_1> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_2 type="int16"> </dcoffset_clamp_value_2> <!-- additive dc offset, S13 -->
+       				<dcoffset_clamp_value_3 type="int16"> </dcoffset_clamp_value_3> <!-- additive dc offset, S13 -->
+       			</viss_clamp_long>  
+      </viss_clamp> 
+   </typedef>
+  <!--=======================================================================-->
+
+  <use_case val="65535">
+    <n-space>
+      <region0 class="0">
+        <exposure val="1" min="0" max="100000">  </exposure>
+        <gain val="0" min="0" max="250000">  </gain>
+      </region0>
+    </n-space>
+    <parameter_package>
+    <!-- Parameters for photospace class: 0 -->
+        <VISS_BLC_dcc type="viss_clamp">
+        {
+   				 //viss_clamp_vshort : For linear mode only this should be set to sensor Black Level
+   				  {
+   						0, // dcoffset_clamp_value 0
+   						0, // dcoffset_clamp_value 1
+   						0, // dcoffset_clamp_value 2
+   						0, // dcoffset_clamp_value 3
+   				  },
+   				 //viss_clamp_short : To be used only in WDR mode. 
+   				  {
+   						0, // dcoffset_clamp_value 0
+   						0, // dcoffset_clamp_value 1
+   						0, // dcoffset_clamp_value 2
+   						0, // dcoffset_clamp_value 3
+   				  },
+   				 //viss_clamp_long : To be used only in WDR mode.
+   				  {
+   						0, // dcoffset_clamp_value 0
+   						0, // dcoffset_clamp_value 1
+   						0, // dcoffset_clamp_value 2
+   						0, // dcoffset_clamp_value 3
+   				  }
+        }
+        </VISS_BLC_dcc>
+    </parameter_package>
+  </use_case>
+</VISS_BLC>

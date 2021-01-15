@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VISS_NSF4_CFG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--this is comment-->
+	<dcc_name>viss_nsf4_cfg</dcc_name>
+	<dcc_header>
+		<camera_module_id>  820 </camera_module_id>
+		<dcc_descriptor_id>   21 </dcc_descriptor_id>
+		<algorithm_vendor_id>  1 </algorithm_vendor_id>
+		<tunning_tool_version> 0 </tunning_tool_version>
+	</dcc_header>
+	<!--=======================================================================-->
+    <typedef>
+        <cfg_nsf4v_vars type="struct">
+
+		  <enable type="int32"> </enable> <!-- enable nsf4-->
+		  <mode type="int32"> </mode>
+		  <shading_gain type="int32"> </shading_gain>
+
+		  <u1_knee type="int32"> </u1_knee>
+		  <tn1 type="int32"> </tn1>
+		  <tn2 type="int32"> </tn2>
+		  <tn3 type="int32"> </tn3>
+
+		  <noise_thr_x type="int32[4][12]"> </noise_thr_x>
+		  <noise_thr_y type="int32[4][12]"> </noise_thr_y>
+		  <noise_thr_s type="int32[4][12]"> </noise_thr_s>
+
+		  <shd_x type="int32"> </shd_x>
+		  <shd_y type="int32"> </shd_y>
+		  <shd_t type="int32"> </shd_t>
+		  <shd_kh type="int32"> </shd_kh>
+		  <shd_kv type="int32"> </shd_kv>
+		  <shd_gmax type="int32"> </shd_gmax>
+		  <shd_set_sel type="int32"> </shd_set_sel>
+
+		  <shd_lut_x type="int32[2][16]"> </shd_lut_x>
+		  <shd_lut_y type="int32[2][16]"> </shd_lut_y>
+		  <shd_lut_s type="int32[2][16]"> </shd_lut_s>
+
+		  <wb_gains type="int32[4]"> </wb_gains>
+		</cfg_nsf4v_vars>
+    </typedef>
+	<!--=======================================================================-->
+	
+	<use_case val="1023">
+		<n-space>
+			<region0 class="0">
+				<gain                      val="0" min="0" max="10240">  </gain>
+				<exposure              val="1" min="0" max="10000000">  </exposure>
+				<colortemperature val="2" min="0" max="10000">  </colortemperature>
+			</region0>
+		</n-space>
+	    <parameter_package>
+            <cfg_nsf4v_dcc type="cfg_nsf4v_vars">
+              {
+					1, //enable
+					16, //mode: 0 => nsf3 2x2 mode, 1~31 => nsf4 2x2 mode
+					0, //shading gain enable
+
+					32,    // U1  knee points for U,  U0.6 (0 ~ 63)
+					64,   //  Tn1 scaling factor,     U3.5 (1.0 = 32)
+					32,   //  Tn2 scaling factor,     U3.5 (1.0 = 32)
+					16,   //  Tn3 scaling factor,     U3.5 (1.0 = 32)
+
+					// Threshold parameters
+					//noise_thr_x
+					{
+						{0, 64, 256, 1024, 4096, 4096, 4096, 4096, 4096, 4096, 4096, 4096},
+						{0, 64, 256, 1024, 4096, 4096, 4096, 4096, 4096, 4096, 4096, 4096},
+						{0, 64, 256, 1024, 4096, 4096, 4096, 4096, 4096, 4096, 4096, 4096},
+						{0, 64, 256, 1024, 4096, 4096, 4096, 4096, 4096, 4096, 4096, 4096},
+					},
+					//noise_thr_y
+					{
+						{16, 20, 38, 76, 0, 0, 0, 0, 0, 0, 0, 0},
+						{16, 20, 38, 76, 0, 0, 0, 0, 0, 0, 0, 0},
+						{16, 20, 38, 76, 0, 0, 0, 0, 0, 0, 0, 0},
+						{16, 20, 38, 76, 0, 0, 0, 0, 0, 0, 0, 0},
+					},
+					//noise_thr_s
+					{
+						{128,  192,  100, 52, 0, 0, 0, 0, 0, 0, 0, 0},
+						{128,  192,  100, 52, 0, 0, 0, 0, 0, 0, 0, 0},
+						{128,  192,  100, 52, 0, 0, 0, 0, 0, 0, 0, 0},
+						{128,  192,  100, 52, 0, 0, 0, 0, 0, 0, 0, 0},
+					},
+
+					// Shading gain parameters
+					0, //shd_x
+					0, //shd_y
+					0, //shd_t
+					0, //shd_kh
+					0, //shd_kv
+					0, //shd_gmax
+					0, //shd_set_sel
+
+					//shd_lut_x
+					{
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+					},
+					//shd_lut_y
+					{
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+					},
+					//shd_lut_s
+					{
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+					},
+				  //wb_gains
+				  {512, 512, 512, 512}
+			  }
+            </cfg_nsf4v_dcc>
+	    </parameter_package>
+	</use_case>
+	
+	<!--=====================================================================-->
+</VISS_NSF4_CFG>

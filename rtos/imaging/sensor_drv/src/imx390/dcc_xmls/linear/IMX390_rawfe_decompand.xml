@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RAWFE_cfg_pwl_vshort_xml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--this is a comment-->
+    <dcc_name>rawfe_decompand</dcc_name>
+    <dcc_header>
+		<camera_module_id> 390 </camera_module_id>
+	    <dcc_descriptor_id> 4 </dcc_descriptor_id>
+	    <algorithm_vendor_id>  1 </algorithm_vendor_id>
+	    <tunning_tool_version> 0 </tunning_tool_version>
+    </dcc_header>
+  <!--=======================================================================-->
+    <typedef>
+		<cfg_rawfe_decompand type="struct">
+		<!--=================================cfg pwl long======================================-->
+			<pwl_vshort_lut_en type="uint16"> </pwl_vshort_lut_en>
+			<pwl_vshort_mask type="uint16"> </pwl_vshort_mask>
+			<pwl_vshort_shift type="uint16"> </pwl_vshort_shift>
+			<pwl_vshort_lut_bitdepth type="uint16"> </pwl_vshort_lut_bitdepth>
+			<pwl_vshort_lut_clip type="uint16"> </pwl_vshort_lut_clip>
+      <pwl_vshort_lut type="uint16[639]"> </pwl_vshort_lut>
+    </cfg_rawfe_decompand>
+</typedef>
+
+<!--=======================================================================-->
+  <use_case val="1023">
+      <n-space>
+    <region0 class="0">
+      <exposure val="1" min="0" max="2000000">  </exposure>
+      <gain val="0" min="0" max="100000">  </gain>
+    </region0>
+  </n-space>
+
+      <parameter_package>
+          <cfg_rawfe_decompand type="cfg_rawfe_decompand">
+        {
+          0     // enable
+          4095  // mask
+          0     // shift
+          12    // lutBitdepth
+          65535 // lutClip
+          {
+              #include "lut_rawfe_pwl_linear.txt"
+          }
+        }
+      </cfg_rawfe_decompand>
+  </parameter_package>
+</use_case>
+<!--=====================================================================-->
+</RAWFE_cfg_pwl_vshort_xml>
