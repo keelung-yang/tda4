@@ -1354,9 +1354,17 @@ int32_t ImageSensor_RemoteServiceHandler(char *service_name, uint32_t cmd,
                     }
                 }else
                 {
-                    printf("Disable all cameras on UB960_0/UB960_1 in broadcast mode \n");
-                    status |= disableUB960Broadcast(0);
-                    status |= disableUB960Broadcast(1);
+                    if(channel_mask & 0x0F)
+                    {
+                        printf("Disable all cameras on UB960_0 in broadcast mode \n");
+                        status |= disableUB960Broadcast(0);
+                    }
+                    
+                    if(channel_mask & 0xF0)
+                    {
+                        printf("Disable all cameras on UB960_1 in broadcast mode \n");
+                        status |= disableUB960Broadcast(1);
+                    }
                 }
 
                 if(0 != channel_mask)
@@ -1415,8 +1423,16 @@ int32_t ImageSensor_RemoteServiceHandler(char *service_name, uint32_t cmd,
 
                 /*Disable broadcast after enabling streaming 
                 so that every camera can have independent 2A control */
-                status |= disableUB960Broadcast(0);
-                status |= disableUB960Broadcast(1);
+                if(channel_mask & 0x0F)
+                {
+                    printf("Disable all cameras on UB960_0 in broadcast mode \n");
+                    status |= disableUB960Broadcast(0);
+                }                
+                if(channel_mask & 0xF0)
+                {
+                    printf("Disable all cameras on UB960_1 in broadcast mode \n");
+                    status |= disableUB960Broadcast(1);
+                }
 
                 if(0 != channel_mask)
                 {
