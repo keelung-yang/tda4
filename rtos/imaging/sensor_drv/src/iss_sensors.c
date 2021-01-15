@@ -1334,13 +1334,14 @@ int32_t ImageSensor_RemoteServiceHandler(char *service_name, uint32_t cmd,
                 status = 0;
                 channel_mask_supported = (1<<pSenHndl->createPrms->num_channels) - 1;
                 channel_mask &= channel_mask_supported;
+                printf("IM_SENSOR_CMD_CONFIG : channel_mask = 0x%x \n", channel_mask);
                 if(1U == pSenHndl->sensorIntfPrms->sensorBroadcast)
                 {
                     if((channel_mask & 0x0F) == 0x0F)
                     {
                         printf("Configuring all cameras on UB960_0 in broadcast mode \n");
-                    status |= enableUB960Broadcast(0);
-                    status |= IssSensor_Config((void*)pSenHndl, 0, sensor_features_requested);
+                        status |= enableUB960Broadcast(0);
+                        status |= IssSensor_Config((void*)pSenHndl, 0, sensor_features_requested);
                         channel_mask &= 0xF0;
                     }
 
@@ -1353,6 +1354,7 @@ int32_t ImageSensor_RemoteServiceHandler(char *service_name, uint32_t cmd,
                     }
                 }else
                 {
+                    printf("Disable all cameras on UB960_0/UB960_1 in broadcast mode \n");
                     status |= disableUB960Broadcast(0);
                     status |= disableUB960Broadcast(1);
                 }
