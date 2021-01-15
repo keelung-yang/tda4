@@ -62,29 +62,44 @@
 #ifndef _UB96XGW_AR0233_SERDES_H_
 #define _UB96XGW_AR0233_SERDES_H_
 
-#define GW_AR0233_OUT_WIDTH           (1920U)
-#define GW_AR0233_OUT_HEIGHT          (1080U)
+#define GW_AR0233_OUT_WIDTH           (1820U)
+#define GW_AR0233_OUT_HEIGHT          (940U)
 
 #define GW_AR0233_DES_CFG_SIZE    (10U)
 I2cParams ub9xxDesCfg_GW_AR0233[GW_AR0233_DES_CFG_SIZE] = {
-    {0xB3, 0x00, 0x1},
-    {0x4C, 0x01, 0x1},
-    {0x58, 0x5E, 0x1},
-    {0x32, 0x01, 0x1},
-    {0x33, 0x02, 0x1},
-    {0x20, 0x20, 0x1},
-    {0x0F, 0x7F, 0x1},
-    {0x6E, 0x10, 0x1},
-    {0x6F, 0x32, 0x1},
+    {0xB3, 0x00, 0x1},  // BIST Control Register
+    {0x4C, 0x01, 0x1},  // FPD3_PORT_SEL Register
+    {0x58, 0x5E, 0x1},  // BCC_CONFIG Register
+    {0x32, 0x01, 0x1},  // CSI_PORT_SEL Register
+    {0x33, 0x02, 0x1},  // CSI_CTL Register
+    {0x20, 0x20, 0x1},  // FWD_CTL1 Register
+    {0x0F, 0x7F, 0x1},  // GPIO_INPUT_CTL Register
+    {0x6E, 0x10, 0x1},  // BC_GPIO_CTL0 Register
+    {0x6F, 0x32, 0x1},  // BC_GPIO_CTL1
     {0xFFFF, 0x00, 0x0} /*End of script */
 };
 
 #define GW_AR0233_SER_CFG_SIZE    (5U)
 I2cParams ub9xxSerCfg_GW_AR0233[GW_AR0233_SER_CFG_SIZE] = {
-    {0x0E, 0xF0, 0xF0},
-    {0x0D, 0xF0, 0x60},
+    {0x0E, 0xF0, 0xF0}, // Vertical Back Porch
+    {0x0D, 0xF0, 0x60}, // Line Period
     {0x0D, 0xB0, 0x60},
     {0x0D, 0xB4, 0x60},
+    {0xFFFF, 0x00, 0x0} /*End of script */
+};
+
+#define GW_AR0233_SENSOR_CFG_SIZE    (5U)
+I2cParams ub9xxSensorCfg_GW_AR0233[GW_AR0233_SENSOR_CFG_SIZE] = {
+    {0x301A, 0x0018, 500},  // RESET_REGISTER
+    {0x3070, 0x0000, 1},    //  1: Solid color test pattern,
+                            //  2: Full color bar test pattern,
+                            //  3: Fade to grey color bar test pattern,
+                            //  256: Walking 1 test pattern (12 bit)
+    {0x3072, 0x0123, 1},    // R
+    {0x3074, 0x0456, 1},    // G(GR row)
+    {0x3076, 0x0abc, 1},    // B
+    {0x3078, 0x0def, 1},    // G(GB row)
+
     {0xFFFF, 0x00, 0x0} /*End of script */
 };
 

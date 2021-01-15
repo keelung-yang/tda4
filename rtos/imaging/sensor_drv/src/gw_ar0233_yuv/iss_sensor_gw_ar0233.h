@@ -69,7 +69,8 @@
  *******************************************************************************
  */
 
-#define ISS_SENSOR_GW_AR0233_FEATURES      (ISS_SENSOR_FEATURE_DCC_SUPPORTED)
+//#define ISS_SENSOR_GW_AR0233_FEATURES      (ISS_SENSOR_FEATURE_DCC_SUPPORTED)
+#define ISS_SENSOR_GW_AR0233_FEATURES      (0)
 /*******************************************************************************
  *  Local Functions Declarations
  *******************************************************************************
