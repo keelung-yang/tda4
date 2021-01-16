@@ -66,8 +66,8 @@
 /**< ISS AEWB plugin is included here to get the default AEWB configuration
      from each sensor */
 
-#define AR0233_OUT_WIDTH   (1920)
-#define AR0233_OUT_HEIGHT  (1280)
+#define AR0233_OUT_WIDTH   (1820)
+#define AR0233_OUT_HEIGHT  (940)
 
 #include "ar0233_linear_config.h"
 
@@ -83,14 +83,18 @@
 
 #define ISS_SENSOR_AR0233_DEFAULT_EXP_RATIO     (128U)
 
+/*
 #define ISS_SENSOR_AR0233_FEATURES      (ISS_SENSOR_FEATURE_MANUAL_EXPOSURE|   \
                                          ISS_SENSOR_FEATURE_MANUAL_GAIN|       \
                                          ISS_SENSOR_FEATURE_LINEAR_MODE|       \
                                          ISS_SENSOR_FEATURE_COMB_COMP_WDR_MODE|       \
                                          ISS_SENSOR_FEATURE_DCC_SUPPORTED)
+*/
+#define ISS_SENSOR_AR0233_FEATURES      (ISS_SENSOR_FEATURE_LINEAR_MODE)
+
 
 #define AR0233_CHIP_ID_REG_ADDR               (0x3000)
-#define AR0233_CHIP_ID_REG_VAL                (0x956)
+#define AR0233_CHIP_ID_REG_VAL                (0x0C54) // (0x956)
 #define SENSOR_AR0233_EXP_T1                  (0x3012U)
 #define SENSOR_AR0233_MIN_EXP_ROWS            (0x1)
 #define SENSOR_AR0233_MAX_EXP_ROWS            (0x140)

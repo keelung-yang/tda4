@@ -88,7 +88,7 @@ I2cParams ub9xxSerCfg_GW_AR0233[GW_AR0233_SER_CFG_SIZE] = {
     {0xFFFF, 0x00, 0x0} /*End of script */
 };
 
-#define GW_AR0233_SENSOR_CFG_SIZE    (5U)
+#define GW_AR0233_SENSOR_CFG_SIZE    (7U)
 I2cParams ub9xxSensorCfg_GW_AR0233[GW_AR0233_SENSOR_CFG_SIZE] = {
     {0x301A, 0x0018, 500},  // RESET_REGISTER
     {0x3070, 0x0000, 1},    //  1: Solid color test pattern,

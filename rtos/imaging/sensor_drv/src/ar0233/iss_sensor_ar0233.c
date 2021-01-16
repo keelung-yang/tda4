@@ -263,20 +263,23 @@ static int32_t AR0233_Config(uint32_t chId, void *pSensorHdl, uint32_t sensor_fe
 
     if(sensor_features_requested & ISS_SENSOR_FEATURE_COMB_COMP_WDR_MODE)
     {
+        appLogPrintf("AR0233_Config --:-- ISS_SENSOR_FEATURE_COMB_COMP_WDR_MODE");
         deserCfg = ar0233SensorRegConfigWdr.desCfgPreScript;
         serCfg = ar0233SensorRegConfigWdr.serCfgPreScript;
         sensorCfg = ar0233SensorRegConfigWdr.sensorCfgPreScript;
         sensor_cfg_script_len = AR0233_WDR_CONFIG_SIZE;
     }else
     {
+        appLogPrintf("AR0233_Config --:-- ISS_SENSOR_FEATURE_LINEAR_MODE");
         deserCfg = ar0233SensorRegConfigLinear.desCfgPreScript;
         serCfg = ar0233SensorRegConfigLinear.serCfgPreScript;
-        sensorCfg = ar0233SensorRegConfigLinear.sensorCfgPreScript;
-        sensor_cfg_script_len = AR0233_LINEAR_CONFIG_SIZE;
+        sensorCfg = ar0220LinearConfig;
+        sensor_cfg_script_len = AR0220_LINEAR_CONFIG_SIZE;
     }
 
     if(NULL != deserCfg)
     {
+        appLogPrintf("AR0233_Config --:-- Ininialize des");
         status |= ub960_cfgScript(deserCfg, ub960InstanceId);
     }
     if(0 == status)
@@ -286,6 +289,7 @@ static int32_t AR0233_Config(uint32_t chId, void *pSensorHdl, uint32_t sensor_fe
     /*The code assumes that I2C instance is the same for sensor and serializer*/
         if(NULL != serCfg)
         {
+            appLogPrintf("AR0233_Config --:-- Ininialize ser");
             status = ub953_cfgScript(i2cInstId, pCreatePrms->i2cAddrSer[chId], serCfg);
         }
         if(0 == status)
