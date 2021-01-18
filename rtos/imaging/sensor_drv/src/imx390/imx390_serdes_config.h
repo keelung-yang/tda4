@@ -85,32 +85,47 @@ Unsuppprted version
 #define IMX390_D3_SER_CFG_SIZE    (10U)
 
 I2cParams ub953SerCfg_D3IMX390[IMX390_D3_SER_CFG_SIZE] = {
-    {0x01, 0x01, 0x20},
-    {0x02, 0x72, 0x10},
+    {0x01, 0x01, 0x20},    // RESET_CTL
+                           //    Resets the entire digital block except registers. This bit is self-clearing
+
+    {0x02, 0x72, 0x10},    // General_CFG
+                           //    Continuous Clock
+                           //    4-lane configuration
+                           //    Transmitter CRC Generator Enable
+                           //    3.3V
 
 #if (FUSION_BOARD_VER == 0)
-    {0x06, 0x21, 0x1F},
+    {0x06, 0x21, 0x1F},    // CLKOUT_CTRL0
+                           //    HS_CLK_DIV: 001: Div by 2
+                           //    DIV_M_VAL: M value for M/N divider for CLKOUT
 #elif (FUSION_BOARD_VER == 1)
-    {0x06, 0x41, 0x1F},
+    {0x06, 0x41, 0x1F},    // CLKOUT_CTRL0
+                           //    HS_CLK_DIV: 010: Div by 4
+                           //    DIV_M_VAL: M value for M/N divider for CLKOUT
 #else
 Unsuppprted version
 #endif
 
 #if (CAM_MODULE_VER == 0)
-    {0x07, 0x28, 0x1F},
-    {0x0D, 0x01, 0x10},
+    {0x07, 0x28, 0x1F},    // CLKOUT_CTRL1
+                           //    N value for M/N divider for CLKOUT
+    {0x0D, 0x01, 0x10},    //
 #elif (CAM_MODULE_VER == 1)
-    {0x07, 	0x25, 0x1F},
-    {0x0D, 0x03, 0x10},
+    {0x07, 0x25, 0x1F},    // CLKOUT_CTRL1
+                           //    N value for M/N divider for CLKOUT
+    {0x0D, 0x03, 0x10},    // LOCAL_GPIO_DATA
 #else
 Unsuppprted version
 #endif
-    {0x0E, 0xF0, 0x10},
-    {0xB0, 0x04, 0x10},
-    {0xB1, 0x08, 0x10},
-    {0xB2, 0x07, 0x10},
-    {0xFFFF, 0x00, 0x0} //End of script
+    {0x0E, 0xF0, 0x10},    // GPIO_INPUT_CTRL
+
+    {0xB0, 0x04, 0x10},    // IND_ACC_CTL
+    {0xB1, 0x08, 0x10},    // IND_ACC_ADDR
+    {0xB2, 0x07, 0x10},    // IND_ACC_DATA
+    
+    {0xFFFF, 0x00,  0},    // End of script
 };
+
 
 #define IMX390_D3_DES_CFG_SIZE    (59U)
 I2cParams ub960DesCfg_D3IMX390_0[IMX390_D3_DES_CFG_SIZE] = {

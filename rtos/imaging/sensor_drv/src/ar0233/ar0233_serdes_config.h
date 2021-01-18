@@ -131,6 +131,31 @@ I2cParams ub953SerCfg_AR0233[AR0233_SER_CFG_SIZE] = {
     {0xFFFF, 0x00, 0x0} //End of script
 };
 
+
+#define AR0220_SER_CFG_SIZE    (7U)
+I2cParams ub953SerCfg_AR0220[AR0220_SER_CFG_SIZE] = {
+    {0x01, 0x02, 1000},    // RESET_CTL
+                           //    Resets the entire digital block including registers. This bit is self-clearing.
+
+    {0x02, 0x73,   20},    // General_CFG
+                           //    Continuous Clock; 4-lane configuration
+                           //    Transmitter CRC Generator Enable
+                           //    1.8V
+
+    {0x06, 0x41,   20},    // CLKOUT_CTRL0
+                           //    HS_CLK_DIV: 010: Div by 4
+                           //    DIV_M_VAL: M value for M/N divider for CLKOUT
+
+    {0x07, 0x22,   20},    // CLKOUT_CTRL1
+                           //    N value for M/N divider for CLKOUT
+
+    {0x0E, 0x3C,   20},    // GPIO_INPUT_CTRL
+    {0x0D, 0x01,   20},    // LOCAL_GPIO_DATA
+
+    {0xFFFF, 0x00, 00},    // End of script
+};
+
+
 #define AR0233_DES_CFG_SIZE    (66U)
 I2cParams ub960DesCfg_AR0233[AR0233_DES_CFG_SIZE] = {
     {0x1, 0x2, 1000},
