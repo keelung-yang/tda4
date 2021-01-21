@@ -90,7 +90,7 @@
                                          ISS_SENSOR_FEATURE_COMB_COMP_WDR_MODE|       \
                                          ISS_SENSOR_FEATURE_DCC_SUPPORTED)
 */
-#define ISS_SENSOR_AR0233_FEATURES      (ISS_SENSOR_FEATURE_LINEAR_MODE)
+#define ISS_SENSOR_AR0233_FEATURES      (ISS_SENSOR_FEATURE_LINEAR_MODE | ISS_SENSOR_FEATURE_DCC_SUPPORTED)
 
 
 #define AR0233_CHIP_ID_REG_ADDR               (0x3000)

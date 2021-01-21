@@ -78,6 +78,7 @@ SoC will communicate with the devices using alias adresses
 #endif
 
 #define AR0233_I2C_ADDR        (0x10U)
+#define AR0220_I2C_ADDR        (0x10U)
 
 I2cParams ub953SerCfg_AR0233[AR0233_SER_CFG_SIZE] = {
     {0x1, 0x2, 1000},
@@ -142,6 +143,8 @@ I2cParams ub953SerCfg_AR0220[AR0220_SER_CFG_SIZE] = {
                            //    Transmitter CRC Generator Enable
                            //    1.8V
 
+    // {0x03, 0x12,   20},    // FC_MODE_SEL
+
     {0x06, 0x41,   20},    // CLKOUT_CTRL0
                            //    HS_CLK_DIV: 010: Div by 4
                            //    DIV_M_VAL: M value for M/N divider for CLKOUT
@@ -155,6 +158,202 @@ I2cParams ub953SerCfg_AR0220[AR0220_SER_CFG_SIZE] = {
     {0xFFFF, 0x00, 00},    // End of script
 };
 
+
+#define AR0220_DES_CFG_SIZE    (18U)
+I2cParams ub960DesCfg_AR0220[AR0220_DES_CFG_SIZE] = {
+    {0x01, 0x02, 1000},    // RESET_CTL, Digital Reset
+    {0x1f, 0x05, 1000},    // CSI_PLL_CTL
+
+    {0x0D, 0x90, 10}, /*I/O to 3V3 - Options not valid with datashee*/
+    {0x0C, 0x01, 10}, /*Enable port0*/                            
+
+    /*Select Channel 0*/                                               
+    {0x4C, 0x01, 0x10},
+    {0x58, 0x5E, 0x10}, /*Enable Back channel, set to 50Mbs*/
+    {0x72, 0x00, 0x10}, /*VC map*/
+
+    {0x20, 0x00, 0x10}, /*Forwarding and using CSIport 0 */
+
+    {0x4C, 0x01, 0x10}, /* 0x01 */
+    {0x32, 0x01, 0x10}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x10}, /*Enable Continuous clock mode and CSI output*/
+    //{0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    //{0x5D, (SENSOR_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x10}, /*Serializer I2C Address*/
+    {0x65, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x10},
+    {0x66, (SENSOR_0_I2C_ALIAS << 1), 0x10},
+    {0x6D, 0x6C, 0x10}, /*CSI Mode*/                                     
+    {0x72, 0x00, 0x10}, /*VC Map - All to 0 */                           
+
+    {0xFFFF, 0x00, 00},    // End of script
+};
+
+
+#define IMX390_D3_DES_CFG_SIZE_AR0220    (63)
+I2cParams ub960DesCfg_D3IMX390_AR0220_0[IMX390_D3_DES_CFG_SIZE_AR0220] = {
+    {0x01, 0x02, 0x20},    // RESET_CTL, Digital Reset
+    {0x1f, 0x00, 0x00},    // CSI_PLL_CTL
+
+    {0x0D, 0x90, 0x1}, /*I/O to 3V3 - Options not valid with datashee*/
+    {0x0C, 0x0F, 0x1}, /*Enable All ports*/
+
+    /*Select Channel 0*/                                               
+    {0x4C, 0x01, 0x10},
+    {0x58, 0x5E, 0x1}, /*Enable Back channel, set to 50Mbs*/
+    {0x72, 0x00, 0x1}, /*VC map*/
+
+    /*Select Channel 1*/
+    {0x4C, 0x12, 0x10},
+    {0x58, 0x5E, 0x1},/*Enable Back channel, set to 50Mbs*/
+
+    /*Select Channel 2*/
+    {0x4C, 0x24, 0x10},
+    {0x58, 0x5E, 0x1},/*Enable Back channel, set to 50Mbs*/
+   
+    /*Select Channel 3*/
+    {0x4C, 0x38, 0x10},
+    {0x58, 0x5E, 0x1},/*Enable Back channel, set to 50Mbs*/
+  
+    {0x20, 0x00, 0x1}, /*Forwarding and using CSIport 0 */
+
+    /*Sets GPIOS*/     
+    {0x10, 0x83, 0x1},
+    {0x11, 0xA3, 0x1},
+    {0x12, 0xC3, 0x1},
+    {0x13, 0xE3, 0x1},
+
+    {0x4C, 0x01, 0x10}, /* 0x01 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_0_I2C_ALIAS << 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_0_I2C_ALIAS << 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0x00,0x0}, /*VC Map - All to 0 */
+
+    {0x4C, 0x12, 0x10}, /* 0x12 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_1_I2C_ALIAS << 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_1_I2C_ALIAS << 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0x55,0x0}, /*VC Map - All to 1 */
+
+    {0x4C, 0x24, 0x10}, /* 0x24 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_2_I2C_ALIAS<< 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_2_I2C_ALIAS << 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0xaa,0x0}, /*VC Map - All to 2 */
+
+    {0x4C, 0x38, 0x10}, /* 0x38 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_3_I2C_ALIAS << 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_3_I2C_ALIAS<< 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0xFF,0x0}, /*VC Map - All to 3 */
+    {0xFFFF, 0x00, 0x0} //End of script
+};
+
+I2cParams ub960DesCfg_D3IMX390_AR0220_1[IMX390_D3_DES_CFG_SIZE_AR0220] = {
+    {0x01, 0x02, 0x20},
+    {0x1f, 0x00, 0x00},
+
+    {0x0D, 0x90, 0x1}, /*I/O to 3V3 - Options not valid with datashee*/
+    {0x0C, 0x0F, 0x1}, /*Enable All ports*/
+
+    /*Select Channel 0*/                                               
+    {0x4C, 0x01, 0x10},
+    {0x58, 0x5E, 0x1}, /*Enable Back channel, set to 50Mbs*/
+    {0x72, 0x00, 0x1}, /*VC map*/
+
+    /*Select Channel 1*/
+    {0x4C, 0x12, 0x10},
+    {0x58, 0x5E, 0x1},/*Enable Back channel, set to 50Mbs*/
+
+    /*Select Channel 2*/
+    {0x4C, 0x24, 0x10},
+    {0x58, 0x5E, 0x1},/*Enable Back channel, set to 50Mbs*/
+   
+    /*Select Channel 3*/
+    {0x4C, 0x38, 0x10},
+    {0x58, 0x5E, 0x1},/*Enable Back channel, set to 50Mbs*/
+  
+    {0x20, 0x00, 0x1}, /*Forwarding and using CSIport 0 */
+
+    /*Sets GPIOS*/     
+    {0x10, 0x83, 0x1},
+    {0x11, 0xA3, 0x1},
+    {0x12, 0xC3, 0x1},
+    {0x13, 0xE3, 0x1},
+
+    {0x4C, 0x01, 0x10}, /* 0x01 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_4_I2C_ALIAS << 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_4_I2C_ALIAS << 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0x00,0x0}, /*VC Map - All to 0 */
+
+    {0x4C, 0x12, 0x10}, /* 0x12 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_5_I2C_ALIAS << 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_5_I2C_ALIAS << 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0x55,0x0}, /*VC Map - All to 1 */
+
+    {0x4C, 0x24, 0x10}, /* 0x24 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_6_I2C_ALIAS<< 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_6_I2C_ALIAS << 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0xaa,0x0}, /*VC Map - All to 2 */
+
+    {0x4C, 0x38, 0x10}, /* 0x38 */
+    {0x32, 0x01, 0x1}, /*Enable TX port 0*/
+    {0x33, 0x02, 0x1}, /*Enable Continuous clock mode and CSI output*/
+    {0xBC, 0x00, 0x1}, /*Unknown*/
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, 0x30, 0x1}, /*Serializer I2C Address*/
+    {0x65, (SER_7_I2C_ALIAS << 1U), 0x1},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x1}, /*Sensor I2C Address*/
+    {0x66, (SENSOR_7_I2C_ALIAS<< 1U), 0x1},
+    {0x6D, 0x6C,0x0}, /*CSI Mode*/
+    {0x72, 0xFF,0x0}, /*VC Map - All to 3 */
+    {0xFFFF, 0x00, 0x0} //End of script
+};
 
 #define AR0233_DES_CFG_SIZE    (66U)
 I2cParams ub960DesCfg_AR0233[AR0233_DES_CFG_SIZE] = {
@@ -229,11 +428,11 @@ I2cParams ub960DesCfg_AR0233[AR0233_DES_CFG_SIZE] = {
     {0x6D, 0x6C,0x1}, /*CSI Mode*/                                     
     {0x72, 0x00,0x1}, /*VC Map - All to 0 */                           
     {0x7C, 0x20, 0x10}, /*Line Valid active high, Frame Valid active high*/
-    {0xD5, 0xF3, 0x10}, /*Auto Attenuation*/                           
+    {0xD5, 0xF3, 0x10}, /*Auto Attenuation*/       
     {0xB0,0x1C, 0x1},  
     {0xB1,0x15, 0x1},  
     {0xB2,0x0A, 0x1},  
-    {0xB2,0x00, 0x1},  
+    {0xB2,0x00, 0x1},                      
 
     {0x32, 0x21, 0x1},
     {0x33, 0x02, 0x1},

@@ -129,8 +129,8 @@ Unsuppprted version
 
 #define IMX390_D3_DES_CFG_SIZE    (59U)
 I2cParams ub960DesCfg_D3IMX390_0[IMX390_D3_DES_CFG_SIZE] = {
-    {0x01, 0x02, 0x20},
-    {0x1f, 0x00, 0x00},
+    {0x01, 0x02, 0x20},    // RESET_CTL, Digital Reset
+    {0x1f, 0x00, 0x00},    // CSI_PLL_CTL
 
     {0x0D, 0x90, 0x1}, /*I/O to 3V3 - Options not valid with datashee*/
     {0x0C, 0x0F, 0x1}, /*Enable All ports*/
