@@ -129,7 +129,7 @@ static IssSensorIntfParams     ar0233SensorIntfPrms = {
 };
 
 IssSensorConfig     ar0233SensorRegConfigLinear = {
-    ub960DesCfg_D3IMX390_AR0220_0,     /*desCfgPreScript*/
+    ub960DesCfg_AR0220,     /*desCfgPreScript*/
     ub953SerCfg_AR0220,     /*serCfgPreScript*/
     ar0220LinearConfig_0,        /*sensorCfgPreScript*/
     ub960AR0233DesCSI2Enable,        /*desCfgPostScript*/

@@ -79,6 +79,7 @@ SoC will communicate with the devices using alias adresses
 
 #define AR0233_I2C_ADDR        (0x10U)
 #define AR0220_I2C_ADDR        (0x10U)
+#define SER_0_I2C_ADDR         (0x18U)
 
 I2cParams ub953SerCfg_AR0233[AR0233_SER_CFG_SIZE] = {
     {0x1, 0x2, 1000},
@@ -161,32 +162,28 @@ I2cParams ub953SerCfg_AR0220[AR0220_SER_CFG_SIZE] = {
 
 #define AR0220_DES_CFG_SIZE    (18U)
 I2cParams ub960DesCfg_AR0220[AR0220_DES_CFG_SIZE] = {
-    {0x01, 0x02, 1000},    // RESET_CTL, Digital Reset
-    {0x1f, 0x05, 1000},    // CSI_PLL_CTL
+    {0x01, 0x02, 0x200},    // RESET_CTL, Digital Reset
+    {0x1f, 0x00, 0x10},     // CSI_PLL_CTL
 
-    {0x0D, 0x90, 10}, /*I/O to 3V3 - Options not valid with datashee*/
-    {0x0C, 0x01, 10}, /*Enable port0*/                            
+    {0x0D, 0x90, 0x10},     // I/O to 3V3 - Options not valid with datashee
+    {0x0C, 0x01, 0x10},     // Enable Rx port 0
 
-    /*Select Channel 0*/                                               
-    {0x4C, 0x01, 0x10},
-    {0x58, 0x5E, 0x10}, /*Enable Back channel, set to 50Mbs*/
-    {0x72, 0x00, 0x10}, /*VC map*/
-
-    {0x20, 0x00, 0x10}, /*Forwarding and using CSIport 0 */
-
-    {0x4C, 0x01, 0x10}, /* 0x01 */
-    {0x32, 0x01, 0x10}, /*Enable TX port 0*/
-    {0x33, 0x02, 0x10}, /*Enable Continuous clock mode and CSI output*/
-    //{0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
-    //{0x5D, (SENSOR_0_I2C_ALIAS << 1), 0x10},
-    {0x5D, 0x30, 0x10}, /*Serializer I2C Address*/
+    {0x4C, 0x01, 0x10},     // Select Channel 0
+    {0x58, 0x5E, 0x10},     // Enable Back channel, set to 50Mbs
+    {0x32, 0x01, 0x10},     // Enable Tx port 0
+    {0x33, 0x02, 0x10},     // Enable Continuous clock mode and CSI output
+    {0xBC, 0x00, 0x10},     // Frame Valid Minimum Time, FIXME
+    {0x5C, (SER_0_I2C_ALIAS << 1), 0x10},
+    {0x5D, (SER_0_I2C_ADDR << 1),  0x10},   // Serializer I2C Address
     {0x65, (SER_0_I2C_ALIAS << 1), 0x10},
-    {0x5E, (AR0233_I2C_ADDR << 1), 0x10},
+    {0x5E, (AR0233_I2C_ADDR << 1), 0x10},   // Sensor I2C Address
     {0x66, (SENSOR_0_I2C_ALIAS << 1), 0x10},
-    {0x6D, 0x6C, 0x10}, /*CSI Mode*/                                     
-    {0x72, 0x00, 0x10}, /*VC Map - All to 0 */                           
+    {0x6D, 0x6C, 0x10}, /*CSI Mode*/
+    {0x72, 0x00, 0x10}, /*VC Map - All to 0 */
 
-    {0xFFFF, 0x00, 00},    // End of script
+    {0x20, 0xE0, 0x10}, /*Forwarding and using CSIport 0 */
+
+    {0xFFFF, 0x00, 0x00} //End of script
 };
 
 
