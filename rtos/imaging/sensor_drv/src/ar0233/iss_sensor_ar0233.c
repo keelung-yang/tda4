@@ -273,7 +273,7 @@ static int32_t AR0233_Config(uint32_t chId, void *pSensorHdl, uint32_t sensor_fe
         appLogPrintf("AR0233_Config --:-- ISS_SENSOR_FEATURE_LINEAR_MODE");
         deserCfg = ar0233SensorRegConfigLinear.desCfgPreScript;
         serCfg = ar0233SensorRegConfigLinear.serCfgPreScript;
-        sensorCfg = ar0233SensorRegConfigLinear.sensorCfgPreScript;
+        sensorCfg = ar0220LinearConfig_0; // ar0233SensorRegConfigLinear.sensorCfgPreScript;
         sensor_cfg_script_len = AR0220_LINEAR_CONFIG_SIZE_0;
     }
 
