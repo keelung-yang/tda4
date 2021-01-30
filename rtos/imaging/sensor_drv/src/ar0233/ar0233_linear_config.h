@@ -1742,18 +1742,26 @@ I2cParams ar0220LinearConfig_1[AR0220_LINEAR_CONFIG_SIZE_1] = {
 };
 
 
-#define AR0220_PATTERN_CONFIG_SIZE (7)
+#define AR0220_PATTERN_CONFIG_SIZE (12)
 I2cParams ar0220PatternConfig[AR0220_PATTERN_CONFIG_SIZE] = {
-     {0x301A, 0x0018, 500},   // RESET_REGISTER
-     {0x3070, 0x0000, 1},	//  1: Solid color test pattern,
-                              //  2: Full color bar test pattern,
-                              //  3: Fade to grey color bar test pattern,
-                              //256: Walking 1 test pattern (12 bit)
-     {0x3072, 0x0123, 1},	// R
-     {0x3074, 0x0456, 1},	// G(GR row)
-     {0x3076, 0x0abc, 1},	// B
-     {0x3078, 0x0def, 100},	// G(GB row)
-     {0xFFFF, 0x0000, 100}        //End of script
+    {0x301A, 0x0018, 500},   // RESET_REGISTER
+
+    {0x3004, 4, 0x01},  /* X_ADDR_START_ */                 
+    {0x3002, 4, 0x01},  /* Y_ADDR_START_ */                 
+    {0x3008, 1823, 0x01},  /* X_ADDR_END_ */                 
+    {0x3006, 943, 0x01},  /* Y_ADDR_END_ */    
+    {0x300A, 996, 1},
+    {0x300C, 1864, 1},
+    
+    {0x3070, 0x0000, 1},	//  1: Solid color test pattern,
+                             //  2: Full color bar test pattern,
+                             //  3: Fade to grey color bar test pattern,
+                             //256: Walking 1 test pattern (12 bit)
+    {0x3072, 0x0123, 1},	// R
+    {0x3074, 0x0456, 1},	// G(GR row)
+    {0x3076, 0x0abc, 1},	// B
+    {0x3078, 0x0def, 100},	// G(GB row)
+    // {0xFFFF, 0x0000, 100}        //End of script
 };
 
 
